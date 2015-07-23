@@ -1,0 +1,22 @@
+#mainBody{
+background: none repeat scroll 0 0 #ddd;
+padding: 20px;
+}
+
+.error_msg{
+/*color:red;*/
+font-size: 16px;
+}
+
+.message{
+position: relative;
+font-weight: bold;
+font-size: 28px;
+color: #6495ED;
+width: 500px;
+text-align: center;
+}
+
+.collapse{display: none;}
+#additional-qs{display:none;}
+.flright{float: right;}
