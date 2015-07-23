@@ -81,7 +81,7 @@
      
         <header class="jumbotron hero-spacer">
             <ul class="nav">
-                <form method="post" class="col-md-6 login" id="account-login" action="user/login_process">
+                <form method="post" class="col-md-6 login" id="account-login" action="<?php echo base_url();?>user/login_process">
                     <h2 class="form-signin-heading">Please sign in</h2>
                     <?php
                       echo "<div class='error_msg'>";

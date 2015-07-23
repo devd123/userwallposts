@@ -26,37 +26,44 @@ class User extends CI_Controller {
 		$this->load->view('login-form');
 	}
 
+	public function logout()
+	{
+		
+	 	$this->session->unset_userdata('logged_in');
+	  	session_destroy();
+	   	redirect('post', 'refresh');
+	}
+
 	// Check for user login process
 	public function login_process() {
 		
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 		if ($this->form_validation->run() == FALSE) { 	
-			$this->load->view('login_form');
+			$this->load->view('login-form');
 		} else {
 			$data = array(
 			'email' => $this->input->post('email'),
 			'password' => $this->input->post('password')
 			);
 			$result = $this->user_model->get_login($data);
-			echo "<pre>"; print_r($result); die;
-			if($result == TRUE){
-				$userdata= $this->user_model->get_userdata($data['username']);
-				
+			//echo "<pre>"; print_r($result); die;
+			if($result){
+			
 				$sess_array = array(
-					'userid' => $userdata->id,
-					'name' => $userdata->name,
-					'username' => $userdata->account_type,
-					'email' => $userdata->email
+					'userid' => $result->UserId,
+					'name' => $result->Name,
+					'username' => $result->UserName,
+					'email' => $result->Email
 				);
-					
+				
 				// Add user data in session
 			
 				$this->session->set_userdata('logged_in', $sess_array);
-				redirect('post/index');
+				redirect('post');
 			}else{
 				$data['error_message'] = 'Invalid Username or Password';
-				$this->load->view('login_form', $data);
+				$this->load->view('login-form', $data);
 			}
 		}
 		

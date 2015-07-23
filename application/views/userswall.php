@@ -51,8 +51,10 @@
 					<?php if ($this->session->userdata('logged_in')) : ?>
                    
 					<li>
-					<a href=""><?php $sessionArray = $this->session->all_userdata(); 
-					echo  "Hello ".$sessionArray['username'];?></a>
+    					<a href="">
+                        <?php $sessionArray = $this->session->all_userdata(); 
+                        echo  "Hello ".$sessionArray['logged_in']['username'];?>
+                        </a>
 					</li>
 				 	<li>
                         <a href="<? echo base_url()?>user/logout" />Logout</a>
