@@ -42,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php //echo site_url();?>">Users Book</a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>">Users Book</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse flright" id="bs-example-navbar-collapse-1">
@@ -75,40 +75,40 @@
         <!-- /.container -->
     </nav>
 
-	<!-- Page Content -->
+	<!-- Page Content -------------------------------------------->
 	<div class="container">
-
-
-        <!-- Jumbotron Header -->
-     
-        <header class="jumbotron hero-spacer">
-            <h1> Only $299 </h1>
-            <p>Being a Landlord in today's ecomonic envioroment can be challenging. Regardless of your circumstances, each eviction is treated with the utmost attention and care!</p>
-            <p><a class="btn btn-primary btn-large">Call to action!</a>
-            </p>
-        </header>
-
-        <hr>
-
-        <!-- Title -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Latest Posts</h3>
+		<div class="row">
+			<div class="col-lg-9">
+			 	<div class='success_msg'>
+	            	<?php echo $this->session->flashdata('message_data');?>
+	       		</div>
+	            <h3 class="page-heading">Latest Posts</h3>
+	            <?php //echo "<pre>"; print_r($posts); die;?>
+	            <?php foreach ($posts as $value) { ?>
+	            	<h3><?php echo $value->Title; ?></h3>
+	            	<p><?php echo $value->Desc; ?></p>
+	            <?php } // endforeach  ?>
+	            
             </div>
+            <?php if ($this->session->userdata('logged_in')) : ?>
+            <div class="col-lg-3">
+               <a href="<?php echo base_url(); ?>post/add"><button type="button" class="btn btn-primary btn-lg">Add Post
+               </button></a>
+            </div>
+        	<?php endif;?>
         </div>
         <!-- /.row -->
 
-      
         <hr>
 
     <!-- Footer -->
-        <footer>
-           <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Devdutt Sharma 2014</p>
-                </div>
+    <footer>
+       <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Devdutt Sharma 2014</p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
     </div>
     <!-- /.container -->

@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="devdutt sharma">
 
-    <title>User Login</title>
+    <title>Add Post</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo CSS_PATH ?>bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
     <!-- Custom CSS -->
     <link href="<?php echo CSS_PATH ?>main.css" rel="stylesheet">
     <link href="<?php echo CSS_PATH ?>custom.css" rel="stylesheet">
-    
+	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,9 +25,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- jQuery -->
-    <script src="<?php echo JS_PATH ?>jquery.js" type="text/javascript"></script>
+	<script src="<?php echo JS_PATH ?>jquery.js" type="text/javascript"></script>
     
-    
+	
 </head>
 <body>
 
@@ -48,24 +48,26 @@
             <div class="collapse navbar-collapse flright" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     
-                    <?php if ($this->session->userdata('logged_in')) : ?>
+					<?php if ($this->session->userdata('logged_in')) : ?>
                    
-                    <li>
-                    <a href=""><?php $sessionArray = $this->session->all_userdata(); 
-                    echo  "Hello ".$sessionArray['username'];?></a>
-                    </li>
-                    <li>
+					<li>
+    					<a href="">
+                        <?php $sessionArray = $this->session->all_userdata(); 
+                        echo  "Hello ".$sessionArray['logged_in']['username'];?>
+                        </a>
+					</li>
+				 	<li>
                         <a href="<? echo base_url()?>user/logout" />Logout</a>
                     </li>
                     <?php  else : ?>
                     <li>
                         <a href="<? echo base_url()?>user/login" />SignIn</a>
                     </li>
-                    <li>
+					<li>
                         <a href="<? echo base_url()?>user/registration" />SignUp</a>
                     </li>
-                    <?php endif; ?>
-                
+					<?php endif; ?>
+				
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -73,59 +75,50 @@
         <!-- /.container -->
     </nav>
 
-    <!-- Page Content -->
-    <div class="container">
-
-
-        <!-- Jumbotron Header -->
-     
-        <header class="jumbotron hero-spacer">
-            <ul class="nav">
-                <form method="post" class="col-md-6 login" id="account-login" action="<?php echo base_url();?>user/login_process">
-                    <h2 class="form-signin-heading">Please sign in</h2>
-                    <?php
-                      echo "<div class='error_msg'>";
-                      if (isset($error_message)) {
-                      echo $error_message;
-                      }
-                      echo validation_errors();
-                      echo "</div>";
-                    ?>
-                    <input type="text" autofocus="" placeholder="Email address" name="email" class="form-control">
-                    <input type="password" placeholder="Password" name="password" class="form-control">
-                    <!-- <label class="checkbox">
-                        <input type="checkbox" value="remember-me">Remember me
-                    </label> -->
-                        <br>
-                    <button id="login-btn" class="btn btn-lg btn-primary btn-block">Sign in</button>
-                </form>
-            </ul>
-        </header>
-
-        <hr>
-
-        <!-- Title -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Latest Posts</h3>
-            </div>
+	<!-- Page Content -------------------------------------------->
+	<div class="container">
+		<div class="row">
+		  <div class='error_msg'>
+            <?php  if (isset($message)) { echo $message; } ?>
+           </div>
+            <div class="col-lg-6">
+		        <h3> Add post , media , image  </h3>
+		        
+			    <form class="form-horizontal" role="form" method="post" action="<?php echo base_url();?>post/insert_post">
+				  <div class="form-group">
+				    <label class="control-label col-sm-2" for="title">Title:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="title" placeholder="Enter Title">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-2" for="description">Description:</label>
+				    <div class="col-sm-10"> 
+				      <input type="text" class="form-control" name="description" placeholder="Enter Description">
+				    </div>
+				  </div>
+				
+				  <div class="form-group"> 
+				    <div class="col-sm-offset-2 col-sm-10">
+				      <button type="submit" class="btn btn-default">Submit</button>
+				    </div>
+				  </div>
+				</form>
+     		</div>
         </div>
         <!-- /.row -->
 
-      
         <hr>
 
     <!-- Footer -->
-        <footer>
-           <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Devdutt Sharma 2014</p>
-                </div>
+    <footer>
+       <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Devdutt Sharma 2014</p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
     </div>
     <!-- /.container -->
-
-
 
