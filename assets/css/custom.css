@@ -1,4 +1,13 @@
 .error_msg{color:red;text-align: center;font-size: 14px;}
 .success_msg{color:green;text-align: center;font-size: 14px;}
 .flright{float: right;}
-.page-heading{text-align:center;color: white;background: blue;padding: 10px;}
+.uppercase-hd{text-transform: capitalize;color: orange;}
+.page_header{
+	padding:30px 10px 10px 10px;
+	background:#eee;
+}
+.cpost{background-color: orange;width: 20%;color: white;float: right;}
+.cpost:hover{background-color: orange;color: white;}
+.rowicon{margin-right: 20px;}
+.comments-row{margin-top: 20px;border: 1px solid #eee;}
+.page-content{border: 1px solid #eee;}

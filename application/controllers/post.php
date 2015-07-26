@@ -16,8 +16,24 @@ class Post extends CI_Controller {
 	
 	public function index()
 	{
-		$result['posts'] = $this->post_model->list_post();
-		$this->load->view('userswall', $result);
+		if ($this->session->userdata('logged_in') == ''){
+			redirect('user');
+		}
+
+		$results = $this->post_model->list_post();
+		$data =  array();	
+		foreach ($results as  $result) {
+		 	
+		 	$postid =  $result->Id; 
+		 	$resultdata['posts'] = $result;
+			$resultdata['comments'] = $this->post_model->list_comment($postid);
+			//$resultdata['counts'] = $this->post_model->comment_counts();
+			$data['results'][] = $resultdata;
+
+			//echo "<pre>";print_r($result); die;
+		}
+			//echo "<pre>": print_r($data); die;
+	 		$this->load->view('userswall', $data);
 	}
 
 	public function add()
@@ -33,8 +49,8 @@ class Post extends CI_Controller {
 		$status = 'publish';
 			$data = array(
 					'UserId' => $userid,
-					'Title' => $this->input->post('title'),
-					'Desc' => $this->input->post('description'),
+					// 'Title' => $this->input->post('title'),
+					'Description' => $this->input->post('description'),
 					'Status' => $status
 				);
 		
@@ -49,6 +65,34 @@ class Post extends CI_Controller {
 				$this->load->view('userswall' , $data);
 			}		
 	}
+
+	public function insert_comment()
+	{
+		$sessionArray = $this->session->all_userdata();
+		$userid = $sessionArray['logged_in']['userid'];
+		
+		$status = 'publish';
+			$data = array(
+					'UserId' => $userid,
+					'PostId' => $this->input->post('postid'),
+					'Comment' => $this->input->post('comment'),
+					'Status' => $status
+				);
+		
+		$result = $this->post_model->insert_comment($data);
+			if ($result == TRUE) {
+				 $last_insertid = $this->db->insert_id();
+				 $message = 'you have added a comment successfully!';
+				 $this->session->set_flashdata('message_data', $message);
+				 redirect('post');
+			}else {
+				$data['message'] = 'comment could note be insert!';
+				$this->load->view('userswall' , $data);
+			}		
+	}
+
+	
+
 }
 
 /* End of file welcome.php */

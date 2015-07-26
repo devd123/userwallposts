@@ -85,22 +85,17 @@
 		        <h3> Add post , media , image  </h3>
 		        
 			    <form class="form-horizontal" role="form" method="post" action="<?php echo base_url();?>post/insert_post">
+				 
 				  <div class="form-group">
-				    <label class="control-label col-sm-2" for="title">Title:</label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" name="title" placeholder="Enter Title">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label class="control-label col-sm-2" for="description">Description:</label>
+				    <!-- <label class="control-label col-sm-2" for="description">Description:</label> -->
 				    <div class="col-sm-10"> 
-				      <input type="text" class="form-control" name="description" placeholder="Enter Description">
+				      <input type="text" class="form-control" name="description" placeholder="What's in your mind ?">
 				    </div>
 				  </div>
 				
 				  <div class="form-group"> 
 				    <div class="col-sm-offset-2 col-sm-10">
-				      <button type="submit" class="btn btn-default">Submit</button>
+				      <button type="submit" class="btn btn-default">Post</button>
 				    </div>
 				  </div>
 				</form>
