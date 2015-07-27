@@ -28,6 +28,7 @@ class Post extends CI_Controller {
 		 	$resultdata['posts'] = $result;
 			$resultdata['comments'] = $this->post_model->list_comment($postid);
 			$resultdata['comment-count'] = $this->post_model->comment_counts($postid);
+			$resultdata['like-count'] = $this->post_model->like_counts($postid);
 			$data['results'][] = $resultdata;
 
 			//echo "<pre>";print_r($result); die;
@@ -91,9 +92,9 @@ class Post extends CI_Controller {
 			}		
 	}
 
-	public function insert_like()
+	public function ajax_insert_like()
 	{
-		$postid = $_POST['postid'];
+		$postid = $_POST['postid']; 
 		$sessionArray = $this->session->all_userdata();
 		$userid = $sessionArray['logged_in']['userid'];
 		$rate = '1';
@@ -103,7 +104,7 @@ class Post extends CI_Controller {
 					'Rate' => $rate
 				);
 		
-		$result = $this->post_model->insert_like($data);
+		$result = $this->post_model->insert_likes($data);
 		$last_insertid = $this->db->insert_id();
 		echo $result;		 
 		die;		 

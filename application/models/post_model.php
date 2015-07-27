@@ -68,7 +68,7 @@ Class Post_model extends CI_Model {
 
     }
 
-    public function like_counts($data) {
+    public function insert_likes($data) {
 
 		$this->db->insert('likes', $data);
 		if ($this->db->affected_rows() > 0) {
@@ -78,6 +78,19 @@ Class Post_model extends CI_Model {
 		}
 
     }
+
+     public function like_counts($postid) {
+
+		$this->db->select('*');    
+		$this->db->from('likes');
+		$this->db->where(array('PostId'=> $postid, 'Rate'=> 1));
+		$query = $this->db->get(); 
+		$rowcount = $query->num_rows();
+
+		return $rowcount;
+
+    }
+
 		
 	
 }//end of the class

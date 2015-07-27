@@ -136,9 +136,10 @@
                   
                   <span class="rowicon"><?php echo $result['posts']->submitted_at; ?></span>
                   <span class="rowicon">
-                    <div class="like-btn">Like</div>
-                    <div class="dislike-btn"></div>
-                    <?php //echo $result['like-count']->likes_count; ?>
+                  <button class="like-btn" value="<?php echo $result['posts']->Id; ?>">Like : <?php echo $result['like-count']?></button>
+                  </span>
+                  <span class="rowicon"><button class="unlike-btn" value="<?php echo $result['posts']->Id; ?>">Unlike</button></span>
+                    
                   </span>
                   <span class="rowicon"><i class="icon-comment">Comments : </i><?php echo $result['comment-count']?></span>
                   
@@ -204,15 +205,21 @@
         //     }
         //   })
         // });
+          
 
           $('.like-btn').click(function(){
+
               $('.dislike-btn').removeClass('dislike-h');    
               $(this).addClass('like-h');
+              var thisObj = $(this);
+              var id = $(this).attr('value');
+
               $.ajax({
                   type:"POST",
-                  url:"post/ajax-counts",
-                  data:'act=like&pageID='+pageID,
-                  success: function(){
+                  url:"post/ajax_insert_like",
+                  data:{postid :id},
+                  success: function(response){
+                    alert(response);
                   }
               });
           });
