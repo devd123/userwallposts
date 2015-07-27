@@ -27,8 +27,8 @@ class Post extends CI_Controller {
 		 	$postid =  $result->Id; 
 		 	$resultdata['posts'] = $result;
 			$resultdata['comments'] = $this->post_model->list_comment($postid);
-			$resultdata['comment-count'] = $this->post_model->comment_counts($postid);
-			$resultdata['like-count'] = $this->post_model->like_counts($postid);
+			$resultdata['comment-count'] = $this->post_model->get_comment_counts($postid);
+			$resultdata['like-count'] = $this->post_model->get_like_counts($postid);
 			$data['results'][] = $resultdata;
 
 			//echo "<pre>";print_r($result); die;
@@ -105,8 +105,10 @@ class Post extends CI_Controller {
 				);
 		
 		$result = $this->post_model->insert_likes($data);
-		$last_insertid = $this->db->insert_id();
-		echo $result;		 
+		if($result == TRUE):
+		$counts = $this->post_model->get_like_counts($postid);
+		echo $counts;	
+		endif;	 
 		die;		 
 				
 	}

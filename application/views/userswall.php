@@ -14,7 +14,7 @@
     <!-- Custom CSS -->
     <link href="<?php echo CSS_PATH ?>main.css" rel="stylesheet">
     <link href="<?php echo CSS_PATH ?>custom.css" rel="stylesheet">
-	  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	  
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -78,7 +78,7 @@
    
        <?php if ($this->session->userdata('logged_in')) : ?>
         <div class="row page_header">
-         <div class="col-lg-9">
+         <div class="col-lg-12">
                 <div class='error_msg'>
                 <?php  if (isset($message)) { echo $message; } ?>
                 </div>
@@ -102,7 +102,7 @@
     
 
 		<div class="row page-content">
-			<div class="col-lg-12 col-sm-12">
+			<div class="col-lg-9">
   			 	<span class='success_msg'>
             	<?php echo $this->session->flashdata('message_data');?>
        		</span>
@@ -110,42 +110,41 @@
           <?php //echo "<pre>"; print_r($results); die;?>
           <?php foreach ($results as $result) :  ?>
           	<h4 class="uppercase-hd"><?php echo $result['posts']->Name; ?></h4>
-           <span><?php echo $result['posts']->Description; ?></span>
-          
-            <!-- /.Show comment list -->
-            <div class="comments-row col-lg-9">
-               
+           <span class="post-desc"><?php echo $result['posts']->Description; ?></span>
+          		<!--start notation row -->
+                <table class="table table-hover" id="postaddon-table">
+                <tr>
+                <td class="rowicon"><?php echo $result['posts']->submitted_at; ?></td>
+                <td class="rowicon">
+                <button class="like-btn" value="<?php echo $result['posts']->Id; ?>">Like: 
+                <span class="likes"><?php echo $result['like-count']?></span>
+                </button></td>
+                <!-- <td class="rowicon"><button class="unlike-btn" value="<?php echo $result['posts']->Id; ?>">Unlike</button></td> -->
+                
+                <td class="rowicon"><i class="icon-comment">Comments : </i><?php echo $result['comment-count']?></td>
+                </tr>
+                </table>
+              <!--start notation row -->
+
+            <!--start div comment list -->
+            <div class="comments-row">
+               	
                 <?php foreach ($result['comments'] as $key => $comments) { ?>
                   <h5 class="uppercase-hd"><?php echo $comments->Name; ?></h5>
                   <span><?php echo $comments->Comment; ?></span>
-                <?php } ?>
-               
-                <!-- /.Add comment form -->
-                <!-- <button class="btn btn-default cpost" value="<?php echo $post->Id; ?>" >Show Comment</button></br></br> -->
+                <?php } // end comments?>
+               	              <!-- Add comment form -->
                 <form class="form-comment" role="form" method="post" action="<?php echo base_url();?>post/insert_comment">
                     <br/>
                     <input type="hidden" class="form-control" name="postid" value="<?php echo $result['posts']->Id;?>">
                     <div class="form-group">
                     <input type="text" class="form-control" name="comment" placeholder="write a comment">
                     </div>
-                
                 </form>
             </div>
-
-                  <hr>
-                  
-                  <span class="rowicon"><?php echo $result['posts']->submitted_at; ?></span>
-                  <span class="rowicon">
-                  <button class="like-btn" value="<?php echo $result['posts']->Id; ?>">Like : <?php echo $result['like-count']?></button>
-                  </span>
-                  <span class="rowicon"><button class="unlike-btn" value="<?php echo $result['posts']->Id; ?>">Unlike</button></span>
-                    
-                  </span>
-                  <span class="rowicon"><i class="icon-comment">Comments : </i><?php echo $result['comment-count']?></span>
-                  
-                  <hr>
-
-            <?php endforeach; // endforeach  ?>
+            <!--end div comment list -->
+          		
+          <?php endforeach; // end main result array  ?>
 	            
       </div>
          
@@ -219,7 +218,10 @@
                   url:"post/ajax_insert_like",
                   data:{postid :id},
                   success: function(response){
-                    alert(response);
+                  	 $(".likes").remove();
+                  	 
+                     thisObj.append(response);
+
                   }
               });
           });

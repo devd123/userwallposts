@@ -9,5 +9,7 @@
 .cpost{background-color: orange;width: 20%;color: white;float: right;}
 .cpost:hover{background-color: orange;color: white;}
 .rowicon{margin-right: 20px;}
-.comments-row{margin-top: 20px;border: 1px solid #eee;}
+.comments-row{margin-top: 10px;border: 1px solid #eee;padding: 10px 40px;}
 .page-content{border: 1px solid #eee;}
+.post-desc{margin-bottom: 10px;}
+.table{margin-top:10px;margin-bottom: 0px;}
