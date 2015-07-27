@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 27, 2015 at 12:30 AM
+-- Generation Time: Jul 27, 2015 at 01:26 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `PostId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `comments`
@@ -49,7 +49,29 @@ INSERT INTO `comments` (`Id`, `Comment`, `Status`, `submitted_at`, `PostId`, `Us
 (6, 'goo very good', 'publish', '2015-07-26 16:57:36', 18, 5),
 (7, 'greattttttttt yar', 'publish', '2015-07-26 17:01:00', 13, 5),
 (8, 'good ................', 'publish', '2015-07-26 17:01:16', 23, 5),
-(9, 'koi to bolo........', 'publish', '2015-07-26 17:01:36', 18, 5);
+(9, 'koi to bolo........', 'publish', '2015-07-26 17:01:36', 18, 5),
+(10, 'greattttttttt yar', 'publish', '2015-07-27 05:25:33', 20, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE IF NOT EXISTS `likes` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `PostId` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `Rate` int(11) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`Id`, `PostId`, `UserId`, `Rate`) VALUES
+(1, 13, 3, 1);
 
 -- --------------------------------------------------------
 
