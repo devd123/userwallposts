@@ -27,7 +27,7 @@ class Post extends CI_Controller {
 		 	$postid =  $result->Id; 
 		 	$resultdata['posts'] = $result;
 			$resultdata['comments'] = $this->post_model->list_comment($postid);
-			//$resultdata['counts'] = $this->post_model->comment_counts();
+			$resultdata['comment-count'] = $this->post_model->comment_counts($postid);
 			$data['results'][] = $resultdata;
 
 			//echo "<pre>";print_r($result); die;
@@ -89,6 +89,25 @@ class Post extends CI_Controller {
 				$data['message'] = 'comment could note be insert!';
 				$this->load->view('userswall' , $data);
 			}		
+	}
+
+	public function insert_like()
+	{
+		$postid = $_POST['postid'];
+		$sessionArray = $this->session->all_userdata();
+		$userid = $sessionArray['logged_in']['userid'];
+		$rate = '1';
+			$data = array(
+					'PostId' => $postid,
+					'UserId' => $userid,
+					'Rate' => $rate
+				);
+		
+		$result = $this->post_model->insert_like($data);
+		$last_insertid = $this->db->insert_id();
+		echo $result;		 
+		die;		 
+				
 	}
 
 	

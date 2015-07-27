@@ -56,15 +56,24 @@ Class Post_model extends CI_Model {
 
     }
 
-    public function comment_counts() {
+    public function comment_counts($postid) {
 
-		$this->db->select('count(PostId)');    
+		$this->db->select('*');    
 		$this->db->from('comments');
+		$this->db->where('PostId',$postid);
 		$query = $this->db->get(); 
-		
-		if($query){
-		return $query->row();
-		}else{
+		$rowcount = $query->num_rows();
+
+		return $rowcount;
+
+    }
+
+    public function like_counts($data) {
+
+		$this->db->insert('likes', $data);
+		if ($this->db->affected_rows() > 0) {
+		return true;
+		} else {
 		return false;
 		}
 

@@ -14,7 +14,7 @@
     <!-- Custom CSS -->
     <link href="<?php echo CSS_PATH ?>main.css" rel="stylesheet">
     <link href="<?php echo CSS_PATH ?>custom.css" rel="stylesheet">
-	
+	  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -135,8 +135,12 @@
                   <hr>
                   
                   <span class="rowicon"><?php echo $result['posts']->submitted_at; ?></span>
-                  <span class="rowicon"<i class="icon-heart">Likes : </i><?php echo $result['posts']->likes_count; ?></span>
-                  <span class="rowicon"<i class="icon-comment">Comments : </i><?php //print_r($counts); ?></span>
+                  <span class="rowicon">
+                    <div class="like-btn">Like</div>
+                    <div class="dislike-btn"></div>
+                    <?php //echo $result['like-count']->likes_count; ?>
+                  </span>
+                  <span class="rowicon"><i class="icon-comment">Comments : </i><?php echo $result['comment-count']?></span>
                   
                   <hr>
 
@@ -170,39 +174,49 @@
     
     <!-- show comment by ajax -->
     <script type="text/javascript">
-                $(document).ready(function(){
+      $(document).ready(function(){
+        // $(document).on('click', 'button', function(){
+        //   $('div.col-lg-6').remove();  
 
+        // //$('button').click(function (){
+        //   var thisObj = $(this);
+        //   var postid = $(this).attr('value');
+        //   var response = "";   
+        //   $.ajax({
+        //      type :'POST',
+        //      url :'post/ajaxcall',
+        //      data : {postid : postid},
+        //      dataType:'json', 
+        //     success: function(response) {
+        //      // console.log(response);
+        //       var output="<div class='ajax-comments'>";
+        //       for (var i in response) 
+        //       {
+        //           output+="<h5 class='uppercase-hd'>" + response[i].Name + "</h5>";
+        //           output+="<span>" + response[i].Comment + "</span>";
+        //       }
+        //        output+="</div>";
+              
+              
+        //         thisObj.next().append(output);
 
-                  $(document).on('click', 'button', function(){
-                    $('div.col-lg-6').remove();  
+              
+        //     }
+        //   })
+        // });
 
-                  //$('button').click(function (){
-                    var thisObj = $(this);
-                    var postid = $(this).attr('value');
-                    var response = "";   
-                    $.ajax({
-                       type :'POST',
-                       url :'post/ajaxcall',
-                       data : {postid : postid},
-                       dataType:'json', 
-                      success: function(response) {
-                       // console.log(response);
-                        var output="<div class='ajax-comments'>";
-                        for (var i in response) 
-                        {
-                            output+="<h5 class='uppercase-hd'>" + response[i].Name + "</h5>";
-                            output+="<span>" + response[i].Comment + "</span>";
-                        }
-                         output+="</div>";
-                        
-                        
-                          thisObj.next().append(output);
-
-                        
-                      }
-                    })
-                  });
-                });
+          $('.like-btn').click(function(){
+              $('.dislike-btn').removeClass('dislike-h');    
+              $(this).addClass('like-h');
+              $.ajax({
+                  type:"POST",
+                  url:"post/ajax-counts",
+                  data:'act=like&pageID='+pageID,
+                  success: function(){
+                  }
+              });
+          });
+      });
     </script>
 
     <!-- end of the page html -->
