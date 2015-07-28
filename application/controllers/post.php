@@ -97,20 +97,30 @@ class Post extends CI_Controller {
 		$postid = $_POST['postid']; 
 		$sessionArray = $this->session->all_userdata();
 		$userid = $sessionArray['logged_in']['userid'];
-		$rate = '1';
+
+		$chkuser = $this->post_model->chk_likes($postid,$userid); 
+		if($chkuser == TRUE) {
+			$result = $this->post_model->delete_likes($postid,$userid);
+			if($result == TRUE):
+			$counts = $this->post_model->get_like_counts($postid);
+			echo $counts;	
+			endif;	 
+		}else
+		{
 			$data = array(
 					'PostId' => $postid,
 					'UserId' => $userid,
-					'Rate' => $rate
-				);
+					'Rate' => 1
+			);
 		
-		$result = $this->post_model->insert_likes($data);
-		if($result == TRUE):
-		$counts = $this->post_model->get_like_counts($postid);
-		echo $counts;	
-		endif;	 
-		die;		 
-				
+			$result = $this->post_model->insert_likes($data);
+			if($result == TRUE):
+			$counts = $this->post_model->get_like_counts($postid);
+			echo $counts;	
+			endif;	 
+					 
+		}
+		die;		
 	}
 
 	

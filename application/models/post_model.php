@@ -79,6 +79,19 @@ Class Post_model extends CI_Model {
 
     }
 
+    public function delete_likes($postid,$userid) {
+
+		
+		$this->db->where(array('PostId'=> $postid, 'UserId'=> $userid, 'Rate'=> 1));
+		$this->db->delete('likes');
+		if ($this->db->affected_rows() > 0) {
+		return true;
+		} else {
+		return false;
+		}
+
+    }
+
      public function get_like_counts($postid) {
 
 		$this->db->select('*');    
@@ -87,6 +100,22 @@ Class Post_model extends CI_Model {
 		$query = $this->db->get(); 
 		$rowcount = $query->num_rows();
 		return $rowcount;
+
+    }
+
+    public function chk_likes($postid,$userid) {
+
+		$this->db->select('*');
+		$this->db->from('likes');
+		$this->db->where(array('PostId' => $postid,'UserId' => $userid));
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+	   	return true;
+ 	 	} else {
+		return false;
+		}
 
     }
 

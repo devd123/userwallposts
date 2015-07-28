@@ -1,5 +1,5 @@
 .error_msg{color:red;text-align: center;font-size: 14px;}
-.success_msg{color:green;text-align: center;font-size: 14px;}
+.success_msg{color:green;text-align: center;font-size: 14px;margin-top: 10px}
 .flright{float: right;}
 .uppercase-hd{text-transform: capitalize;color: orange;}
 .page_header{
@@ -13,3 +13,4 @@
 .page-content{border: 1px solid #eee;}
 .post-desc{margin-bottom: 10px;}
 .table{margin-top:10px;margin-bottom: 0px;}
+.like-h,.dislike-h{display: none;}

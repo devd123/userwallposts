@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 27, 2015 at 01:26 PM
+-- Generation Time: Jul 28, 2015 at 09:34 AM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `PostId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `comments`
@@ -50,7 +50,12 @@ INSERT INTO `comments` (`Id`, `Comment`, `Status`, `submitted_at`, `PostId`, `Us
 (7, 'greattttttttt yar', 'publish', '2015-07-26 17:01:00', 13, 5),
 (8, 'good ................', 'publish', '2015-07-26 17:01:16', 23, 5),
 (9, 'koi to bolo........', 'publish', '2015-07-26 17:01:36', 18, 5),
-(10, 'greattttttttt yar', 'publish', '2015-07-27 05:25:33', 20, 3);
+(10, 'greattttttttt yar', 'publish', '2015-07-27 05:25:33', 20, 3),
+(11, 'mene kar dikhaya', 'publish', '2015-07-28 03:54:05', 19, 2),
+(12, 'grettt yar', 'publish', '2015-07-28 03:54:49', 19, 2),
+(13, 'chalo chale', 'publish', '2015-07-28 03:55:39', 22, 2),
+(14, 'kya hua tera bada', 'publish', '2015-07-28 03:59:35', 17, 2),
+(15, 'kya hai ye........', 'publish', '2015-07-28 04:01:02', 15, 2);
 
 -- --------------------------------------------------------
 
@@ -64,14 +69,35 @@ CREATE TABLE IF NOT EXISTS `likes` (
   `UserId` int(11) NOT NULL,
   `Rate` int(11) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
 
 --
 -- Dumping data for table `likes`
 --
 
 INSERT INTO `likes` (`Id`, `PostId`, `UserId`, `Rate`) VALUES
-(1, 13, 3, 1);
+(21, 23, 4, 1),
+(23, 13, 4, 1),
+(24, 18, 4, 1),
+(25, 19, 4, 1),
+(26, 20, 4, 1),
+(30, 12, 4, 1),
+(34, 13, 1, 1),
+(35, 23, 1, 1),
+(36, 18, 1, 1),
+(37, 19, 1, 1),
+(38, 20, 1, 1),
+(39, 21, 1, 1),
+(40, 22, 1, 1),
+(41, 14, 1, 1),
+(42, 15, 1, 1),
+(43, 24, 1, 1),
+(44, 16, 1, 1),
+(46, 12, 1, 1),
+(50, 13, 2, 1),
+(65, 12, 2, 1),
+(67, 16, 2, 1),
+(70, 12, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -132,7 +158,7 @@ INSERT INTO `users` (`UserId`, `Name`, `UserName`, `Password`, `Email`) VALUES
 (1, 'dev sharma', 'devd', 'dev@123', 'dev@gmail.com'),
 (2, 'karan sharma', 'karan', 'dev@123', 'karan@gmail.com'),
 (3, 'rohit sharma', 'rohit', 'dev@123', 'rohit@gmail.com'),
-(4, 'rihana jolly', 'rihana', 'dev@123', 'rihana@gamil.com'),
+(4, 'rihana jolly', 'rihana', 'dev@123', 'rihana@gmail.com'),
 (5, 'virat kohli', 'virat', 'dev@123', 'virat@gmail.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

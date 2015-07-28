@@ -103,9 +103,8 @@
 
 		<div class="row page-content">
 			<div class="col-lg-9">
-  			 	<span class='success_msg'>
-            	<?php echo $this->session->flashdata('message_data');?>
-       		</span>
+  			 	
+          <p class='success_msg'><?php echo $this->session->flashdata('message_data');?></p>
   	          
           <?php //echo "<pre>"; print_r($results); die;?>
           <?php foreach ($results as $result) :  ?>
@@ -117,9 +116,10 @@
                 <td class="rowicon"><?php echo $result['posts']->submitted_at; ?></td>
                 <td class="rowicon">
                 <button class="like-btn" value="<?php echo $result['posts']->Id; ?>">Like: 
-                <span class="likes"><?php echo $result['like-count']?></span>
-                </button></td>
-                <!-- <td class="rowicon"><button class="unlike-btn" value="<?php echo $result['posts']->Id; ?>">Unlike</button></td> -->
+                <span class="likes"><?php echo $result['like-count']?></span></button>
+                <!-- <button class="dislike-h" value="<?php echo $result['posts']->Id; ?>">Unlike</button> -->
+                </td>
+                
                 
                 <td class="rowicon"><i class="icon-comment">Comments : </i><?php echo $result['comment-count']?></td>
                 </tr>
@@ -133,7 +133,7 @@
                   <h5 class="uppercase-hd"><?php echo $comments->Name; ?></h5>
                   <span><?php echo $comments->Comment; ?></span>
                 <?php } // end comments?>
-               	              <!-- Add comment form -->
+ 	              <!-- Add comment form -->
                 <form class="form-comment" role="form" method="post" action="<?php echo base_url();?>post/insert_comment">
                     <br/>
                     <input type="hidden" class="form-control" name="postid" value="<?php echo $result['posts']->Id;?>">
@@ -175,41 +175,20 @@
     <!-- show comment by ajax -->
     <script type="text/javascript">
       $(document).ready(function(){
-        // $(document).on('click', 'button', function(){
-        //   $('div.col-lg-6').remove();  
-
-        // //$('button').click(function (){
-        //   var thisObj = $(this);
-        //   var postid = $(this).attr('value');
-        //   var response = "";   
-        //   $.ajax({
-        //      type :'POST',
-        //      url :'post/ajaxcall',
-        //      data : {postid : postid},
-        //      dataType:'json', 
-        //     success: function(response) {
-        //      // console.log(response);
-        //       var output="<div class='ajax-comments'>";
-        //       for (var i in response) 
-        //       {
-        //           output+="<h5 class='uppercase-hd'>" + response[i].Name + "</h5>";
-        //           output+="<span>" + response[i].Comment + "</span>";
-        //       }
-        //        output+="</div>";
-              
-              
-        //         thisObj.next().append(output);
-
-              
-        //     }
-        //   })
-        // });
+         
+            //       var output="<div class='ajax-comments'>";
+            //       for (var i in response) 
+            //       {
+            //           output+="<h5 class='uppercase-hd'>" + response[i].Name + "</h5>";
+            //           output+="<span>" + response[i].Comment + "</span>";
+            //       }
+            //        output+="</div>";
           
 
           $('.like-btn').click(function(){
 
-              $('.dislike-btn').removeClass('dislike-h');    
-              $(this).addClass('like-h');
+              //$('.dislike-btn').removeClass('dislike-h');    
+              //$(this).addClass('like-h');
               var thisObj = $(this);
               var id = $(this).attr('value');
 
@@ -218,9 +197,9 @@
                   url:"post/ajax_insert_like",
                   data:{postid :id},
                   success: function(response){
-                  	 $(".likes").remove();
-                  	 
-                     thisObj.append(response);
+                    console.log(response);
+                  	 thisObj.find(".likes").remove();
+                  	 thisObj.append("<span class='likes'>"+ response +"</span>");
 
                   }
               });
